@@ -35,7 +35,7 @@
 </p>
 
 
-> 基于Aho–Corasick算法实现的敏感词过滤方案，Aho–Corasick算法是由Alfred V. Aho和Margaret J.Corasick 发明的字符串搜索算法，用于在输入的一串字符串中匹配有限组“字典”中的子串。它与普通字符串匹配的不同点在于同时与所有字典串进行匹配。算法均摊情况下具有近似于线性的时间复杂度，约为字符串的长度加所有匹配的数量。
+> 基于Aho–Corasick算法实现的敏感词过滤方案，Aho–Corasick算法是由Alfred V. Aho和Margaret J.Corasick 发明的字符串搜索算法，用于在输入的一串字符串中匹配有限组"字典"中的子串。它与普通字符串匹配的不同点在于同时与所有字典串进行匹配。算法均摊情况下具有近似于线性的时间复杂度，约为字符串的长度加所有匹配的数量。
 
 实现详细说明（搜索算法未更新，请查看代码）：
 
@@ -86,20 +86,67 @@ yarn add mint-filter
 
 ## 3. 使用
 
-### CommonJS导入
-```javascript
-const { Mint } = require('mint-filter')
+### 基础使用
+```typescript
+import { createMintFilter } from 'mint-filter'
+
+// 初始化过滤器
+const filter = createMintFilter(['敏感词1', '敏感词2'])
+
+// 基本过滤使用
+const result = filter.filter('这是一段包含敏感词1的文本')
+console.log(result)
+// 输出: { words: ['敏感词1'], text: '这是一段包含****的文本' }
+
+// 验证文本是否包含敏感词
+const isValid = filter.verify('这是一段正常文本')
+console.log(isValid) // 输出: true
 ```
 
-### TypeScript / ES Module引用
+### 高级配置
+
+#### 自定义替换字符
+```typescript
+// 使用自定义替换字符
+const filter = createMintFilter(['敏感词'], { customCharacter: '#' })
+const result = filter.filter('包含敏感词的文本')
+console.log(result)
+// 输出: { words: ['敏感词'], text: '包含###的文本' }
+```
+
+#### 过滤选项
+```typescript
+// 不替换敏感词，仅检测
+const result = filter.filter('包含敏感词的文本', { replace: false })
+console.log(result)
+// 输出: { words: ['敏感词'], text: '包含敏感词的文本' }
+
+// 快速验证模式，发现敏感词立即返回
+const result = filter.filter('包含敏感词1和敏感词2的文本', { verify: true })
+console.log(result)
+// 输出: { words: ['敏感词1'], text: '包含****和敏感词2的文本' }
+```
+
+### 动态管理敏感词
 
 ```typescript
-import Mint from 'mint-filter'
-const mint = new Mint(['敏感词数组'])
+// 添加新的敏感词
+filter.add('新敏感词')
 
-// 基本使用
-mint.filter('需要验证的文本')
+// 删除敏感词
+const status = filter.delete('敏感词1')
+console.log(status) 
+// 输出: 'delete' 表示成功删除
+// 输出: 'update' 表示词不存在或其他情况
 ```
+
+### 特性说明
+
+1. 大小写不敏感：过滤器会自动处理大小写
+2. 高性能：使用Aho-Corasick算法实现，具有接近线性的时间复杂度
+3. 返回结果包含：
+   - words: 检测到的敏感词列表
+   - text: 处理后的文本（如果启用替换）
 
 ## 4. 构造函数
 ### constructor
