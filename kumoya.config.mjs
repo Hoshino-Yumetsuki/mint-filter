@@ -1,6 +1,6 @@
 export const kumoyaConfig = {
   entry: './src/index.ts',
-  outputFolder: 'lib',
+  outputFolder: 'dist',
   bundle: true,
   outputType: true,
   minify: true,

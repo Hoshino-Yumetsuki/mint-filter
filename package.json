@@ -2,16 +2,26 @@
   "name": "mint-filter",
   "version": "4.0.3",
   "description": "基于Aho–Corasick算法，更轻巧的JavaScript敏感词过滤库。🚀",
-  "main": "dist/main/index.js",
-  "typings": "dist/main/index.d.ts",
-  "module": "dist/module/index.js",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "dev": "nodemon -e ts, js",
-    "build": "npm run lint && rimraf dist && npm run build:main && npm run build:module",
+    "build": "kumoya build",
     "lint": "eslint",
     "lint-fix": "eslint --fix"
   },
-
   "devDependencies": {
     "@types/node": "^22.13.0",
     "@typescript-eslint/eslint-plugin": "^8.21.0",
@@ -29,7 +39,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ZhelinCheng/mint-filter.git"
+    "url": "git+https://github.com/Hoshino-Yumetsuki/mint-filter.git"
   },
   "keywords": [
     "sensitive word filter",
@@ -37,15 +47,10 @@
     "filter",
     "敏感词"
   ],
-  "author": {
-    "name": "ZhelinCheng",
-    "email": "i@zhelin.me",
-    "url": "https://zhelin.me"
-  },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ZhelinCheng/mint-filter/issues"
+    "url": "https://github.com/Hoshino-Yumetsuki/mint-filter/issues"
   },
-  "homepage": "https://github.com/ZhelinCheng/mint-filter#readme",
+  "homepage": "https://github.com/Hoshino-Yumetsuki/mint-filter#readme",
   "packageManager": "yarn@4.6.0+sha512.5383cc12567a95f1d668fbe762dfe0075c595b4bfff433be478dbbe24e05251a8e8c3eb992a986667c1d53b6c3a9c85b8398c35a960587fbd9fa3a0915406728"
 }
