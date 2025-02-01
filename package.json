@@ -1,6 +1,6 @@
 {
-  "name": "mint-filter",
-  "version": "4.0.3",
+  "name": "@q78kg/mint-filter",
+  "version": "1.0.1",
   "description": "基于Aho–Corasick算法，更轻巧的JavaScript敏感词过滤库。🚀",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
