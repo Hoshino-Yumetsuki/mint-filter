@@ -50,6 +50,7 @@ export default [
             "no-new": "off",
             "@typescript-eslint/no-explicit-any": "off",
             "@typescript-eslint/no-unused-vars": "off",
+            "no-use-before-define": "off",
         },
     },
 ];

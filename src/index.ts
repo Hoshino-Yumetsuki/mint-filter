@@ -24,24 +24,27 @@ interface MintOptions {
     customCharacter?: string
 }
 
-export class Mint {
-    root: Node = new Node('root')
-    customCharacter: string
+type MintFilter = {
+    filter: (
+        text: string,
+        options?: Pick<FilterOptions, 'replace' | 'verify'>
+    ) => FilterData
+    verify: (text: string) => boolean
+    delete: (key: string) => 'update' | 'delete'
+    add: (key: string) => boolean
+}
 
-    constructor(keys: string[], ops?: MintOptions) {
-        const len = keys.length
-        this.customCharacter = ops?.customCharacter || '*'
+export const createMintFilter = (
+    keys: string[],
+    ops?: MintOptions
+): MintFilter => {
+    const root = new Node('root')
+    const customCharacter = ops?.customCharacter ?? '*'
 
-        for (let idx = 0; idx < len; idx++) {
-            this.add(keys[idx], false)
-        }
-        this.build()
-    }
-
-    // 构建
-    private build() {
+    // 私有函数
+    const build = () => {
         const queue: Node[] = []
-        queue.push(this.root)
+        queue.push(root)
 
         let idx = 0
         while (queue.length > idx) {
@@ -55,201 +58,15 @@ export class Mint {
                     failNode = failNode.fail
                 }
 
-                node.fail = failNode?.children[key] || this.root
-
+                node.fail = failNode?.children[key] || root
                 queue.push(node)
             }
-
             idx++
         }
     }
 
-    private search(
-        text: string,
-        options: FilterOptions = {
-            replace: true
-        }
-    ) {
-        let node: Node | undefined = this.root
-        const fText: string[] = []
-        const oText: string[] = []
-        const words: string[] = []
-
-        const { replace = true, verify = false } = options
-
-        const textLen = text.length
-        for (let i = 0; i < textLen; i++) {
-            // const key = text.charAt(i);
-            const oKey = text[i]
-            const key = oKey.toLowerCase()
-
-            while (node && !node?.children[key]) {
-                node = node?.fail
-            }
-            node = node?.children[key] || this.root
-
-            fText.push(oKey)
-            oText.push(oKey)
-
-            if (node.word) {
-                let idx = i + 1 - node.depth
-                let word = ''
-                while (idx <= i) {
-                    const v = oText[idx]
-                    word += v
-
-                    if (replace) {
-                        fText[idx] = this.customCharacter
-                    }
-
-                    idx++
-                }
-
-                words.push(word)
-
-                if (verify) {
-                    break
-                }
-            }
-        }
-
-        return {
-            words,
-            text: fText.join('')
-        }
-    }
-
-    /**
-     * 过滤文本
-     *
-     * @param text 文本内容
-     * @param options.replace 是否替换掉敏感词部位
-     * @returns FilterData
-     *
-     * @example
-     *
-     * ```typescript
-     * mint.add('无法通过')
-     * let status = mint.filter('这是一句无法通过的文本')
-     * console.log(status) // { words: ["无法通过"], text: "这是一句****的文本" }
-     *
-     * status = mint.filter('这是一句无法通过的文本', { replace: false })
-     * console.log(status) // { words: ["无法通过"], text: "这是一句无法通过的文本" }
-     * ```
-     */
-    filter(text: string, options?: Pick<FilterOptions, 'replace'>): FilterData {
-        return this.search(text, options)
-    }
-
-    /**
-     * 检测文本是否通过验证
-     *
-     * @param text 文本内容
-     * @returns Boolean
-     *
-     * @example
-     *
-     * ```typescript
-     * mint.add('无法通过')
-     * const status = mint.verify('这是一句无法通过的文本')
-     * console.log(status) // false
-     * ```
-     */
-    verify(text: string) {
-        const { words } = this.search(text, { verify: true })
-        return !words.length
-    }
-
-    /**
-     * 删除关键字
-     *
-     * @param key 关键词
-     * @returns 状态（update ｜ delete），告知用户是删除了树上的节点还是单纯的更新了节点
-     *
-     * @example
-     *
-     * ```typescript
-     * const status = mint.delete('敏感词')
-     * ```
-     */
-    delete(key: string) {
-        const type = this.pop(key.toLowerCase(), key.length, this.root)
-        this.build()
-        return type
-    }
-
-    private pop(
-        key: string,
-        len: number,
-        node?: Node,
-        carry: 'update' | 'delete' = 'delete',
-        idx = 0
-    ): 'update' | 'delete' {
-        if (!node) {
-            return 'delete'
-        }
-
-        if (idx === len) {
-            node.word = false
-            node.count--
-            // 需要删除的情况
-            let isDel = true
-            for (const k in node.children) {
-                if (k) {
-                    isDel = false
-                    break
-                }
-            }
-
-            return isDel ? carry : 'update'
-        } else {
-            const val = key[idx]
-            const next = node.children[val]
-            const type = this.pop(
-                key,
-                len,
-                next,
-                node.word ? 'update' : carry,
-                idx + 1
-            )
-
-            node.count--
-            if (type === 'delete' && next?.count === 0) {
-                delete node.children[val]
-                // node.children[val] = undefined
-            }
-
-            return type
-        }
-    }
-
-    /**
-     * 新增敏感词
-     *
-     * @param key 关键词
-     * @param build 是否构建树，默认不用传递
-     * @returns 状态
-     *
-     * @example
-     *
-     * ```typescript
-     * const status = mint.add('敏感词')
-     * ```
-     */
-    add(key: string, build = true): boolean {
-        const lowKey = key.toLowerCase()
-        const len = lowKey.length
-        this.put(lowKey, len)
-
-        if (build) {
-            this.build()
-        }
-
-        return true
-    }
-
-    private put(key: string, len: number) {
-        let node = this.root
+    const put = (key: string, len: number) => {
+        let node = root
         const lastIdx = len - 1
         node.count++
         for (let idx = 0; idx < len; idx++) {
@@ -271,6 +88,107 @@ export class Mint {
             }
         }
     }
+
+    const pop = (key: string, len: number, node: Node): 'update' | 'delete' => {
+        if (len === 0) {
+            if (node.word) {
+                node.word = false
+                node.count--
+                return 'delete'
+            }
+            return 'update'
+        }
+
+        const val = key[0]
+        const child = node.children[val]
+        if (!child) return 'update'
+
+        const type = pop(key.slice(1), len - 1, child)
+        if (type === 'delete') node.count--
+        return type
+    }
+
+    // 初始化敏感词库
+    keys.forEach((key) => {
+        put(key.toLowerCase(), key.length)
+    })
+    build()
+
+    // 返回公共 API
+    return {
+        filter: (
+            text: string,
+            options?: Pick<FilterOptions, 'replace' | 'verify'>
+        ): FilterData => {
+            let node: Node | undefined = root
+            const fText: string[] = []
+            const oText: string[] = []
+            const words: string[] = []
+
+            const { replace = true, verify = false } = options || {}
+
+            const textLen = text.length
+            for (let i = 0; i < textLen; i++) {
+                // const key = text.charAt(i);
+                const oKey = text[i]
+                const key = oKey.toLowerCase()
+
+                while (node && !node?.children[key]) {
+                    node = node?.fail
+                }
+                node = node?.children[key] || root
+
+                fText.push(oKey)
+                oText.push(oKey)
+
+                if (node.word) {
+                    let idx = i + 1 - node.depth
+                    let word = ''
+                    while (idx <= i) {
+                        const v = oText[idx]
+                        word += v
+
+                        if (replace) {
+                            fText[idx] = customCharacter
+                        }
+
+                        idx++
+                    }
+
+                    words.push(word)
+
+                    if (verify) {
+                        break
+                    }
+                }
+            }
+
+            return {
+                words,
+                text: fText.join('')
+            }
+        },
+
+        verify: (text: string): boolean => {
+            const { words } = createMintFilter(keys, ops).filter(text, {
+                verify: true
+            })
+            return !words.length
+        },
+
+        delete: (key: string): 'update' | 'delete' => {
+            const type = pop(key.toLowerCase(), key.length, root)
+            build()
+            return type
+        },
+
+        add: (key: string): boolean => {
+            const lowKey = key.toLowerCase()
+            put(lowKey, lowKey.length)
+            build()
+            return true
+        }
+    }
 }
 
-export default Mint
+export default createMintFilter
