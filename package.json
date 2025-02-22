@@ -1,6 +1,6 @@
 {
   "name": "@q78kg/mint-filter",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "基于Aho–Corasick算法，更轻巧的JavaScript敏感词过滤库。🚀",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
@@ -18,7 +18,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "yakumo",
+    "build": "yakumo build",
+    "publish": "yarn npm publish",
     "lint": "eslint",
     "lint-fix": "eslint --fix"
   },

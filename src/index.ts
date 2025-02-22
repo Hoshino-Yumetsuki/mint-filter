@@ -190,5 +190,3 @@ export const createMintFilter = (
         }
     }
 }
-
-export default createMintFilter
