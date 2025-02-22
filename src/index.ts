@@ -1,12 +1,3 @@
-/*
- * @Author       : 程哲林
- * @Date         : 2023-02-20 20:03:15
- * @LastEditors  : 程哲林
- * @LastEditTime : 2023-05-08 18:09:03
- * @FilePath     : /mint-filter/src/index.ts
- * @Description  : 未添加文件描述
- */
-
 import Node from './node'
 
 interface FilterOptions {

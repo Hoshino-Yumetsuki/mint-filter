@@ -1,12 +1,3 @@
-/*
- * @Author       : 程哲林
- * @Date         : 2023-02-22 14:28:25
- * @LastEditors  : 程哲林
- * @LastEditTime : 2023-02-24 21:30:02
- * @FilePath     : /mint-filter/src/node.ts
- * @Description  : 未添加文件描述
- */
-
 export default class Node {
     // 深度
     public depth = 0
