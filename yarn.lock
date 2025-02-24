@@ -330,7 +330,7 @@ __metadata:
     typescript: "npm:^5.7.3"
     yakumo: "npm:^1.0.0-beta.21"
     yakumo-rolldown: "npm:^1.0.2"
-    yakumo-tsc: "npm:^1.0.0-beta.5"
+    yakumo-tsc: "npm:^1.0.0-beta.6"
   languageName: unknown
   linkType: soft
 
@@ -3540,17 +3540,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yakumo-tsc@npm:^1.0.0-beta.5":
-  version: 1.0.0-beta.5
-  resolution: "yakumo-tsc@npm:1.0.0-beta.5::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fyakumo-tsc%2F-%2Fyakumo-tsc-1.0.0-beta.5.tgz"
+"yakumo-tsc@npm:^1.0.0-beta.6":
+  version: 1.0.0-beta.6
+  resolution: "yakumo-tsc@npm:1.0.0-beta.6::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fyakumo-tsc%2F-%2Fyakumo-tsc-1.0.0-beta.6.tgz"
   dependencies:
     atsc: "npm:^2.1.0"
     dtsc: "npm:^3.0.4"
     tsconfig-utils: "npm:^4.1.1"
   peerDependencies:
     typescript: "*"
-    yakumo: ^1.0.0-beta.18
-  checksum: 10c0/69918024afbee4467e9b7e93a4009fa17f27f7ab6d2b4839965235a02a7284b7b8351ee6bdcb0ad7fbb60d9375d59d75c71beab6efd749ad6a08e52d0c082880
+    yakumo: ^1.0.0-beta.21
+  checksum: 10c0/cf326cdc55b3c026a595c506dd2747af9fca465847e329674ec7b4bb433f1bee7bf1c12b59f63fd781cd1aa91affe1a21e2c2993747ccec7e0aba561db0410b0
   languageName: node
   linkType: hard
 
