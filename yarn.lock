@@ -329,7 +329,7 @@ __metadata:
     rolldown: "npm:1.0.0-beta.3"
     typescript: "npm:^5.7.3"
     yakumo: "npm:^1.0.0-beta.21"
-    yakumo-rolldown: "npm:1.1.0-beta.2"
+    yakumo-rolldown: "npm:^1.1.0-beta.2"
     yakumo-tsc: "npm:^1.0.0-beta.6"
   languageName: unknown
   linkType: soft
@@ -3527,7 +3527,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yakumo-rolldown@npm:1.1.0-beta.2":
+"yakumo-rolldown@npm:^1.1.0-beta.2":
   version: 1.1.0-beta.2
   resolution: "yakumo-rolldown@npm:1.1.0-beta.2::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fyakumo-rolldown%2F-%2Fyakumo-rolldown-1.1.0-beta.2.tgz"
   dependencies:

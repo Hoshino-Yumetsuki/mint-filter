@@ -13,8 +13,7 @@
     "allowImportingTsExtensions": true,
     "moduleResolution": "bundler",
     "rootDir": "src",
-    "outDir": "dist",
-    "outFile": "dist/index.d.ts"
+    "outFile": "lib/index.d.ts"
   },
   "include": ["src"]
 }
