@@ -329,8 +329,8 @@ __metadata:
     rolldown: "npm:1.0.0-beta.3"
     typescript: "npm:^5.7.3"
     yakumo: "npm:^1.0.0-beta.21"
-    yakumo-rolldown: "npm:^1.1.0-beta.2"
-    yakumo-tsc: "npm:^1.0.0-beta.6"
+    yakumo-rolldown: "npm:^1.1.0-beta.3"
+    yakumo-tsc: "npm:^1.0.0-beta.7"
   languageName: unknown
   linkType: soft
 
@@ -1160,16 +1160,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dtsc@npm:^3.0.4":
-  version: 3.0.4
-  resolution: "dtsc@npm:3.0.4::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fdtsc%2F-%2Fdtsc-3.0.4.tgz"
+"dtsc@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "dtsc@npm:3.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fdtsc%2F-%2Fdtsc-3.1.0.tgz"
   dependencies:
-    tsconfig-utils: "npm:^4.0.5"
+    tsconfig-utils: "npm:^4.1.1"
   peerDependencies:
     typescript: "*"
   bin:
     dtsc: lib/bin.js
-  checksum: 10c0/1fd3ef883e418a90da1ccbece6ac94b480f985b1ed93b33e03ddfcd54a136e82da0e2e1ba1caf2e62ba601e61c4a03eba7fe5da7ba2d0ec436ec8c4066fe955b
+  checksum: 10c0/9369df8f4be7830ac3b4c251028e60acdcf8c66fb1b475c2363edb58f35ab7640275c711b301364e1fd5d71c0b014cb755a4baa3c4938edf48333fb8841262ca
   languageName: node
   linkType: hard
 
@@ -2337,9 +2337,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"kumoya@npm:^2.1.0-beta.2":
-  version: 2.1.0-beta.2
-  resolution: "kumoya@npm:2.1.0-beta.2::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fkumoya%2F-%2Fkumoya-2.1.0-beta.2.tgz"
+"kumoya@npm:^2.1.0-beta.3":
+  version: 2.1.0-beta.3
+  resolution: "kumoya@npm:2.1.0-beta.3::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fkumoya%2F-%2Fkumoya-2.1.0-beta.3.tgz"
   dependencies:
     "@rollup/plugin-terser": "npm:^0.4.4"
     cac: "npm:^6.7.14"
@@ -2351,7 +2351,7 @@ __metadata:
     typescript: "*"
   bin:
     kumoya: dist/bin.js
-  checksum: 10c0/e8b101f0200d1dec7ccfed2d74b61148c679f1f0c30a9300c17e76d244173c6eb792daec647ed06839f272e59fb3cdbbcc209e7faee0ce826d9bab9e55153692
+  checksum: 10c0/714ada23b42ee9c621d7ec5c308d8a4e77211731f2a1abadacaff0a6e8ac147634c2f63cf5be630aefc5182987cfef2ac8f8af212ae5e879b5e63c1c5a5f525c
   languageName: node
   linkType: hard
 
@@ -2941,7 +2941,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"schemastery@npm:^3.14.6":
+"schemastery@npm:^3.14.6, schemastery@npm:^3.16.0":
   version: 3.16.0
   resolution: "schemastery@npm:3.16.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fschemastery%2F-%2Fschemastery-3.16.0.tgz"
   dependencies:
@@ -3527,30 +3527,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yakumo-rolldown@npm:^1.1.0-beta.2":
-  version: 1.1.0-beta.2
-  resolution: "yakumo-rolldown@npm:1.1.0-beta.2::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fyakumo-rolldown%2F-%2Fyakumo-rolldown-1.1.0-beta.2.tgz"
+"yakumo-rolldown@npm:^1.1.0-beta.3":
+  version: 1.1.0-beta.3
+  resolution: "yakumo-rolldown@npm:1.1.0-beta.3::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fyakumo-rolldown%2F-%2Fyakumo-rolldown-1.1.0-beta.3.tgz"
   dependencies:
-    kumoya: "npm:^2.1.0-beta.2"
+    kumoya: "npm:^2.1.0-beta.3"
+    schemastery: "npm:^3.16.0"
     tsconfig-utils: "npm:^4.1.1"
   peerDependencies:
     rolldown: "*"
     yakumo: ^1.0.0-beta.21
-  checksum: 10c0/ae8dbce576d512cb9d938cb9844fd64497b4b56cf723d4679aebb50a8fbf1a54d95a9bec47553824079db8aed7f6236438b1411c1ab8da08155ff68a961bc675
+  checksum: 10c0/fd05909322580c32cfa13e93f8097ba1cfb8fd1fa5e56c3761a29f37e2107176914dd0034ca602cc894b5a928c416d2bca22e35368ecc309403cf415f9b330cd
   languageName: node
   linkType: hard
 
-"yakumo-tsc@npm:^1.0.0-beta.6":
-  version: 1.0.0-beta.6
-  resolution: "yakumo-tsc@npm:1.0.0-beta.6::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fyakumo-tsc%2F-%2Fyakumo-tsc-1.0.0-beta.6.tgz"
+"yakumo-tsc@npm:^1.0.0-beta.7":
+  version: 1.0.0-beta.7
+  resolution: "yakumo-tsc@npm:1.0.0-beta.7::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fyakumo-tsc%2F-%2Fyakumo-tsc-1.0.0-beta.7.tgz"
   dependencies:
     atsc: "npm:^2.1.0"
-    dtsc: "npm:^3.0.4"
+    dtsc: "npm:^3.1.0"
     tsconfig-utils: "npm:^4.1.1"
   peerDependencies:
     typescript: "*"
     yakumo: ^1.0.0-beta.21
-  checksum: 10c0/cf326cdc55b3c026a595c506dd2747af9fca465847e329674ec7b4bb433f1bee7bf1c12b59f63fd781cd1aa91affe1a21e2c2993747ccec7e0aba561db0410b0
+  checksum: 10c0/625d64e76d037501dfcd515111fc4b3bbef4a4b935c3fca6673bfd238061ce6e8861ed6aa7848d7fc1446381aaafb94faf68456ef011f4ac6ac4fb3387ee7048
   languageName: node
   linkType: hard
 
